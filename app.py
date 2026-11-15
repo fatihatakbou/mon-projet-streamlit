@@ -194,23 +194,17 @@ else:
     # Galerie
     # --------------------------
 
-    elif selected == "Galerie":
+elif selected == "Galerie":
 
-        st.title("Galerie")
+    st.title("Galerie")
 
-        col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
-        with col1:
-            st.image(
-                "https://picsum.photos/300/200?1"
-            )
+    with col1:
+        st.image("images/taxi1.jpg")
 
-        with col2:
-            st.image(
-                "https://picsum.photos/300/200?2"
-            )
+    with col2:
+        st.image("images/taxi2.jpg")
 
-        with col3:
-            st.image(
-                "https://picsum.photos/300/200?3"
-            )
+    with col3:
+        st.image("images/taxi3.jpg") 
