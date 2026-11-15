@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from streamlit_option_menu import option_menu
 
+
 # ------------------------------
 # Authentification
 # ------------------------------
-
 def verifier_connexion(username, password):
     users = pd.read_csv("accounts.csv")
 
@@ -27,7 +27,6 @@ if "connected" not in st.session_state:
 # ------------------------------
 # Page Login
 # ------------------------------
-
 if not st.session_state.connected:
 
     st.title("Connexion")
@@ -47,7 +46,6 @@ if not st.session_state.connected:
 # ------------------------------
 # Application
 # ------------------------------
-
 else:
 
     with st.sidebar:
@@ -56,7 +54,7 @@ else:
             "Menu",
             ["Accueil", "Dashboard", "Galerie"],
             icons=["house", "bar-chart", "images"],
-            default_index=0
+            default_index=0,
         )
 
         st.divider()
@@ -68,7 +66,6 @@ else:
     # --------------------------
     # Accueil
     # --------------------------
-
     if selected == "Accueil":
 
         st.title("DataInsight Solutions")
@@ -82,7 +79,6 @@ else:
     # --------------------------
     # Dashboard
     # --------------------------
-
     elif selected == "Dashboard":
 
         st.title("Dashboard Analyse Taxis - Fatiha")
@@ -100,7 +96,7 @@ else:
 
         borough = st.selectbox(
             "Choisissez un quartier de prise en charge :",
-            boroughs
+            boroughs,
         )
 
         df_filtre = df[
@@ -116,9 +112,7 @@ else:
 
         st.divider()
 
-        st.subheader(
-            "Visualisation interactive"
-        )
+        st.subheader("Visualisation interactive")
 
         num_cols = df_filtre.select_dtypes(
             include="number"
@@ -127,22 +121,19 @@ else:
         col_x = st.selectbox(
             "Axe X",
             num_cols,
-            index=num_cols.index("distance")
+            index=num_cols.index("distance"),
         )
 
         col_y = st.selectbox(
             "Axe Y",
             num_cols,
-            index=num_cols.index("fare")
+            index=num_cols.index("fare"),
         )
 
         chart_type = st.radio(
             "Type de graphique",
-            [
-                "Streamlit",
-                "Plotly"
-            ],
-            horizontal=True
+            ["Streamlit", "Plotly"],
+            horizontal=True,
         )
 
         if chart_type == "Streamlit":
@@ -150,7 +141,7 @@ else:
             st.scatter_chart(
                 df_filtre,
                 x=col_x,
-                y=col_y
+                y=col_y,
             )
 
         else:
@@ -160,12 +151,12 @@ else:
                 x=col_x,
                 y=col_y,
                 color="payment",
-                hover_data=["pickup_zone"]
+                hover_data=["pickup_zone"],
             )
 
             st.plotly_chart(
                 fig,
-                use_container_width=True
+                use_container_width=True,
             )
 
         st.divider()
@@ -185,7 +176,7 @@ else:
                 annot=True,
                 cmap="coolwarm",
                 fmt=".2f",
-                ax=ax
+                ax=ax,
             )
 
             st.pyplot(fig_corr)
@@ -193,18 +184,26 @@ else:
     # --------------------------
     # Galerie
     # --------------------------
+    elif selected == "Galerie":
 
-elif selected == "Galerie":
+        st.title("Galerie")
 
-    st.title("Galerie")
+        col1, col2, col3 = st.columns(3)
 
-    col1, col2, col3 = st.columns(3)
+        with col1:
+            st.image(
+                "image/image1.jpg",
+                caption="Axolotl"
+            )
 
-    with col1:
-        st.image("images/taxi1.jpg")
+        with col2:
+            st.image(
+                "image/image2.jpg",
+                caption="Chat"
+            )
 
-    with col2:
-        st.image("images/taxi2.jpg")
-
-    with col3:
-        st.image("images/taxi3.jpg") 
+        with col3:
+            st.image(
+                "image/image3.jpg",
+                caption="Tortue"
+            )
